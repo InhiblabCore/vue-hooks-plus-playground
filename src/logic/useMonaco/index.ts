@@ -9,79 +9,86 @@ import setupMonaco from '~/monaco'
 import { isDark } from '~/logic/dark'
 
 export function useMonaco(target: Ref, options: any) {
-  const changeEventHook = createEventHook<string>()
-  const isSetup = ref(false)
-  let editor: Editor.IStandaloneCodeEditor
+	const changeEventHook = createEventHook<string>()
+	const isSetup = ref(false)
+	let editor: Editor.IStandaloneCodeEditor
 
-  const setContent = async(content: string) => {
-    await until(isSetup).toBeTruthy()
-    if (editor)
-      editor.setValue(content)
-  }
+	const setContent = async (content: string) => {
+		await until(isSetup).toBeTruthy()
+		if (editor) editor.setValue(content)
+	}
 
-  const init = async() => {
-    const { monaco } = await setupMonaco()
-    // @ts-expect-error
-    monaco.editor.defineTheme('vitesse-dark', darktheme)
-    // @ts-expect-error
-    monaco.editor.defineTheme('vitesse-light', lightTheme)
+	const init = async () => {
+		const { monaco } = await setupMonaco()
+		// @ts-expect-error
+		monaco.editor.defineTheme('vitesse-dark', darktheme)
+		// @ts-expect-error
+		monaco.editor.defineTheme('vitesse-light', lightTheme)
 
-    watch(target, () => {
-      const el = unref(target)
+		watch(
+			target,
+			() => {
+				const el = unref(target)
 
-      if (!el)
-        return
+				if (!el) return
 
-      const extension = () => {
-        if (options.language === 'typescript')
-          return 'ts'
-        else if (options.language === 'javascript')
-          return 'js'
-        else if (options.language === 'html')
-          return 'html'
-      }
+				const extension = () => {
+					if (options.language === 'typescript') return 'ts'
+					else if (options.language === 'javascript') return 'js'
+					else if (options.language === 'html') return 'html'
+				}
 
-      const model = monaco.editor.createModel(options.code, options.language, monaco.Uri.parse(`file:///root/${Date.now()}.${extension()}`))
-      editor = monaco.editor.create(el, {
-        model,
-        tabSize: 2,
-        insertSpaces: true,
-        autoClosingQuotes: 'always',
-        detectIndentation: false,
-        folding: false,
-        automaticLayout: true,
-        theme: 'vitesse-dark',
-        minimap: {
-          enabled: false,
-        },
-      })
+				const model = monaco.editor.createModel(
+					options.code,
+					options.language,
+					monaco.Uri.parse(`file:///root/${Date.now()}.${extension()}`)
+				)
+				editor = monaco.editor.create(el, {
+					model,
+					tabSize: 2,
+					insertSpaces: true,
+					autoClosingQuotes: 'always',
+					detectIndentation: false,
+					folding: false,
+					automaticLayout: true,
+					theme: 'vitesse-dark',
+					minimap: {
+						enabled: false,
+					},
+				})
 
-      isSetup.value = true
+				isSetup.value = true
 
-      watch(isDark, () => {
-        if (isDark.value)
-          monaco.editor.setTheme('vitesse-dark')
-        else
-          monaco.editor.setTheme('vitesse-light')
-      }, { immediate: true })
+				watch(
+					isDark,
+					() => {
+						if (isDark.value) monaco.editor.setTheme('vitesse-dark')
+						else monaco.editor.setTheme('vitesse-light')
+					},
+					{ immediate: true }
+				)
 
-      const plugins = editorPlugins.filter(({ language }) => language === options.language)
-      editor.getModel()?.onDidChangeContent(() => {
-        changeEventHook.trigger(editor.getValue())
-        plugins.forEach(({ onContentChanged }) => onContentChanged(editor))
-      })
-    }, {
-      flush: 'post',
-      immediate: true,
-    })
-  }
+				const plugins = editorPlugins.filter(
+					({ language }) => language === options.language
+				)
+				editor.getModel()?.onDidChangeContent(() => {
+					changeEventHook.trigger(editor.getValue())
+					plugins.forEach(({ onContentChanged }) => onContentChanged(editor))
+				})
+			},
+			{
+				flush: 'post',
+				immediate: true,
+			}
+		)
+	}
 
-  init()
+	init()
 
-  tryOnUnmounted(() => stop())
+	tryOnUnmounted(() => stop())
 
-  return {
-    onChange: changeEventHook.on,
-    setContent,
-  }
+	return {
+		onChange: changeEventHook.on,
+		setContent,
+	}
 }
