@@ -10,10 +10,11 @@ const prefix = 'monaco-editor/esm/vs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/vue-hooks-plus/vhp-playground/',
+	base: '/',
 	build: {
 		rollupOptions: {
 			output: {
+				dir: 'docs',
 				manualChunks: {
 					htmlWorker: ['./src/monaco/languages/html/html.worker'],
 					tsWorker: [`${prefix}/language/typescript/ts.worker`],
