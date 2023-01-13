@@ -220,13 +220,13 @@ const appTemplate = `
   font="mono"
   >
   <Coordinate  :flag="flag"/>
-  <div><button @click="toggle">改变主意👆</button></div>
+  <div><button @click="toggle">Change Idea 👆</button></div>
 </div>
 
 `
 const appScript = `
-// 此playground是以 https://play.vueuse.org/ 为模版改造搭建
-//支持无https环境运行，和支持vue-hooks-plus的typescript类型书写。
+// Thank https://github.com/wheatjs/vueuse-playground 🌸
+
 import { useBoolean } from 'vue-hooks-plus'
 import Coordinate from './Coordinate.vue'
 
@@ -243,7 +243,7 @@ const coordinateTemplate = `
   p="2"
   border="rounded"
 >
-  <span text="3xl dark:light-900 dark:opacity-100" m="t-2">{{flag ? '我喜欢😍' : '我不喜欢💔' }}-VueHook Plus</span>
+  <span text="3xl dark:light-900 dark:opacity-100" m="t-2">{{flag ? 'I like 😍' : 'I do not like 💔' }}-VueHook Plus</span>
 </div>
 `
 
