@@ -31,7 +31,7 @@ useEventListener('keydown', (ev) => {
 		spcae="y-2"
 	>
 		<img
-			src="http://43.138.187.142:9000/assets/vue-hooks-plus/logo@2x.png"
+			src="https://raw.githubusercontent.com/InhiblabCore/vue-hooks-plus/master/packages/hooks/docs/public/logo%402x.png"
 			class="w-12"
 		/>
 		<span class="flex-1"></span>
