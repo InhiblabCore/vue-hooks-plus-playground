@@ -5,7 +5,7 @@ import { createSingletonPromise } from '@antfu/utils'
 
 import vueuseTypes from '@vueuse/core/index.d.ts?raw'
 import vueTypes from '@vue/runtime-core/dist/runtime-core.d.ts?raw'
-import vhpTypes from 'vue-hooks-plus/dist/types/index.d.ts?raw'
+// import vhpTypes from 'vue-hooks-plus/dist/types/index.d.ts?raw'
 
 import { orchestrator } from '~/orchestrator'
 
@@ -20,21 +20,7 @@ const setup = createSingletonPromise(async () => {
 		allowJs: true,
 	})
 
-	const registered: string[] = ['vue', '@vueuse/core', 'vue-hooks-plus']
-
-	monaco.languages.typescript.javascriptDefaults.addExtraLib(
-		`
-    declare module 'vue-hooks-plus' { ${vhpTypes} }
-  `,
-		'ts:vue-hooks-plus'
-	)
-
-	monaco.languages.typescript.javascriptDefaults.addExtraLib(
-		`
-    declare module '@vueuse/core' { ${vueuseTypes} }
-  `,
-		'ts:vueuse'
-	)
+	const registered: string[] = ['vue']
 
 	monaco.languages.typescript.javascriptDefaults.addExtraLib(
 		`

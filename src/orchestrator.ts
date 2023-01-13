@@ -260,8 +260,8 @@ const initialPackages = [
 	{
 		name: 'vue-hooks-plus',
 		source: 'unpkg',
-		description: 'vue-hooks-plus源码包',
-		url: 'https://unpkg.com/vue-hooks-plus@1.4.0/dist/js/index.es.js',
+		description: 'Vue hooks library',
+		url: 'https://unpkg.com/vue-hooks-plus/dist/js/index.es.js',
 	},
 ]
 
