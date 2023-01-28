@@ -10,7 +10,7 @@ const prefix = 'monaco-editor/esm/vs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/vue-hooks-plus-playground/',
+	base: '/vue-hooks-plus-playground/play/',
 	build: {
 		rollupOptions: {
 			output: {
