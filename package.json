@@ -1,5 +1,5 @@
 {
-	"name": "playground.vueuse.org",
+	"name": "playground.vue-hooks-plus",
 	"version": "0.0.0",
 	"scripts": {
 		"dev": "vite",
