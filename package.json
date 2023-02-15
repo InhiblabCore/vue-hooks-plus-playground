@@ -17,6 +17,7 @@
 		"@antfu/utils": "^0.1.6",
 		"@headlessui/vue": "^1.2.0",
 		"@types/splitpanes": "^2.2.0",
+		"@vue-hooks-plus/types": "1.6.0-alpha.3",
 		"@vue/runtime-core": "^3.2.37",
 		"@vue/runtime-dom": "^3.2.37",
 		"@vue/shared": "^3.2.37",
@@ -33,7 +34,7 @@
 		"vscode-html-languageservice": "^4.0.3",
 		"vue": "^3.2.37",
 		"vue-hako": "^0.0.1",
-		"vue-hooks-plus": "^1.4.0"
+		"vue-hooks-plus": "^1.6.0-alpha.3"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^0.25.2",
